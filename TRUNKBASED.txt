@@ -1,0 +1,307 @@
+https://cloud.google.com/solutions/devops/devops-tech-trunk-based-development
+
+START WITH why
+
+https://www.jamesshore.com/v2/blog/2006/continuous-integration-on-a-dollar-a-day
+
+“From now on, our code in revision control will always build successfully and pass its tests.”
+
+https://cloud.google.com/solutions/devops/devops-tech-trunk-based-development
+
+
+CONTINUOUS INTEGRATION AND FEATURE BRANCHING ARE NOT
+
+The goal of software development is to sustainably minimise the lead time to create positive business impact
+- early feedback (feedback is crucial!)
+
+Why would we use long running branches
+- we can work in isolation, more productive (local optimisation, individual "speed")
+  -> rework? merge conflicts? very unpredictable
+  -> we should optimise for team/release velocity (global optimisation) instead
+- if a refactor goes nowhere we can just delete it
+  -> do this with a spike -> ALWAYS throw away
+  -> small incremental steps
+- we can control the quality of what goes into production
+  -> purpose of CI...
+  -> you are prevented from releasing into production builds that are not thoroughly tested
+- we can control which features go into production
+  -> feature branching is a poor man's modular architecture.
+  -> (use feature toggles instead)
+
+
+
+problems:
+- delays feedback: continuous isolation
+  -> CI on feature branches: good, but you don't know what breaks when integrating other branches
+- hindes integration of features
+  -> cherry pick changes between branches? (terrible, complexity)
+  -> who has what on which branch?
+- hides work for the rest of the team
+  -> frequent merge to mainline = communicating with your team
+- feature branch = "hidden" conditional
+- works against refactoring
+  -> the longer the branch runs..
+  -> not refactoring = slow down
+- creates inventory
+  -> = value stuck in the system
+  -> no feedback..
+  -> single piece flow
+    - increase throughput
+    - reduce leadtime
+    - reduce time to market
+  -> the lean startup...
+- increases risk
+  -> big changeset, harder to find bugs
+  -> "build always broken"
+- creates all sorts of cognitive overhead
+  -> confluence with overview of branches; keep up to date...
+
+commit multiple times a day on mainline
+- changesets are small
+- release happens from mainline
+  -> release branches
+
+
+
+how
+
+break large changes into a set of small incremental changes
+always commit on green
+decoupled code base (SOLID!)
+lots of fast tests (unit)
+
+Hide unfinished new functionality
+use branch by abstraction when performing large refactorings
+  -> slower, but always working software!
+
+feature toggles to DECOUPLE FEATURE RELEASE FROM CODE DEPLOYMENT (dark launching)
+roll back "at runtime"
+  -> disclaimer: you should remove them asap (adds complexity)
+
+
+pre-merge: short lived branches + pull request
+
+more frequent commits to mainline
+-> more frequent builds
+-> more frequent releases
+-> reduced time to market
+-> more experiments
+
+high performance teams:
+trunk based development = predictor
+
+Feature branching are a a symptom. The evil hides beneath.
+-> not doing incremental software development
+-> lacking automated tests
+-> slow builds
+
+once you do it, you can't imagine going back to feature branches 
+
+
+
+
+supporting old versions absolutely necessary?
+old version = latest version with some "features" toggled off...
+
+
+
+
+
+
+
+
+Summary:
+What is trunk based development (best explained as what it is NOT)
+continuous integration, continuous deployment
+The cost of unmerge
+The cost of queues ("why only merge once in a big batch vs merge often is not better")
+Hardening Releases with trunk based development
+Concurrent development of consecutive releases
+Branch by abstraction (micro, and macro: strangler pattern)
+
+
+prerequisites
+examples in "cloud"
+
+
+continuous isolation -> long living (feature) branches disable CI 
+https://www.youtube.com/watch?v=h4DM-Wa0aDQ
+
+
+
+Trunk based development is about getting rid of the mindset that only "finished" and "fully working" code should be comitted into master. 
+This is never the case. You don't know if your code is working until you release it to the hands of your users. 
+The mindset that this model offers instead is that each commit must NOT be a breaking change. 
+The key is to be making small atomic changes, which don't break CI and your functionality at runtime.
+
+Trunk based development doesn't have to mean everybody pushing to master without any code reviews. 
+What it means is that instead of making multiple small commits into your feature branch, 
+you make pull requests for those same commits to master instead. 
+This requires to break down your work into smaller increments, each of which is slowly working towards a completed feature.
+Chromium (Google Chrome) have always been using trunk development, yet they still have extensive code reviews. 
+They also have rigorous tests running on each pull request before they can be merged into master. 
+This ensures that changes don't break anything in master. 
+However, this approach requires a huge investment in infrastructure. 
+Even a small number of people would be generating a lot of pull requests to master.
+A simple CI setup wouldn't suffice. You would need a network of bots to distribute the load.
+
+
+
+
+
+A source-control branching model, where developers collaborate on code in a single branch called ‘trunk’ (or master/main) *, 
+resist any pressure to create other long-lived development branches by employing documented techniques. 
+They therefore avoid merge hell, do not break the build, and live happily ever after.
+
+
+Trunk-Based Development is a key enabler of Continuous Integration and by extension Continuous Delivery. 
+This ensures the codebase is always releasable on demand and helps to make Continuous Delivery a reality.
+Let me repeat/emphasize that; releasing becomes much easier (trivial even)!
+
+You can either do a direct to trunk commit/push (v small teams) or a Pull-Request workflow as long as those feature branches are short-lived and the product of a single person.
+
+
+
+
+
+
+- CONTINUOUS INTEGRATION
+https://en.wikipedia.org/wiki/Continuous_integration
+In software engineering, continuous integration (CI) is the practice of merging all developers' working copies to a shared mainline several times a day.
+
+
+-> CONTINUOUS DEPLOYMENT
+
+SOLID; O - open for extension, closed for modification
+create a "new" module to add behavior, do not change anything else.
+"Toggle" this new module 
+
+
+
+
+
+
+
+
+- cost of unmerge:
+https://paulhammant.com/2013/03/19/cost-of-unmerge/
+
+
+
+
+
+
+
+
+
+ON "HARDENING" releases (temporary release branches that are DELETED!! after release)
+this is called branch for release and very much "allowed":
+-> "what if a bug is in something already released and we want to fix that version?"
+-> fix on trunk
+-> cherry pick the fix to a branch made starting from a tagged released
+-> why not fix in the release branch? because possibility of regression!!
+https://trunkbaseddevelopment.com/branch-for-release/atscale.png
+
+
+
+
+
+
+Concurrent development of consecutive releases
+=============================================
+consecutive development of consecutive releases is best.
+But impractical... can't "wait around" or serialise (does not scale).
+- Not everything is equal effort 
+- yet the business wants a specific rollout, including dates and can plan that even eighteen months ahead
+- They are very specific because there is an impact on the user community (staff, clients, customers or members of the public). Driving departments may include training, marketing, finance.
+
+What you have got is the perfect setup for disaster born from the random bad news events. Things that can and do happen in software development.
+Or perhaps one thing was underestimated by 50% and that is realized later rather than sooner. Should all of the following releases slip too, assuming the company did not attempt to throw bodies at it in an attempt to solve it? We all know of Fred Brook’s Mythical Man-Month and Edward Yourdon’s Death March
+
+reorder releases?
+(replanning, problems around marketing, education, ...)
+un-merge?
+costly and 0 value added, additional delays, stressy!
+
+flags, abstractions and pipelines:
+
+-> any combination of features can be enabled to create a new release
+A, B, C, D -> D is not ready?
+test with A, B,C -> ship it!
+(after testing - issues with C that can't be resolved "in time"? ship with A, B instead of postponing a release.. ship again with a smaller release of "just C" one week later)
+https://trunkbaseddevelopment.com/branch-by-abstraction (zie afbeelding)
+(P.S. maybe even leave the abstraction in place for easier mocking)
+(!)Branch by Abstraction does not suit all ‘change’ situations.
+One is when you have got to support old APIs and previous releases for more than a short period of time. I.e. when your dependent customers (or detached clients apps) can choose their own upgrade moment.
+
+
+
+
+
+
+solutions to common "problems"
+================================
+- strangler pattern
+- branch by abstraction (example)
+- FEATURE FLAGS (how to-> app.config?)
+
+
+
+
+
+
+"but we can't do this"
+-> you can start today, cultural issue, not technical..
+
+
+
+
+
+- small PR's
+1 pr of 1000 lines -> 1 comment
+1 pr of 10 lines -> 10 comments
+
+prerequisites:
+
+Story size
+small stories (tasks): (fancy acronym, INVEST)
+I	Independent	The PBI should be self-contained, in a way that there is no inherent dependency on another PBI.
+N	Negotiable	PBIs are not explicit contracts and should leave space for discussion.
+V	Valuable	A PBI must deliver value to the stakeholders.
+E	Estimable	You must always be able to estimate the size of a PBI.
+S	Small	PBIs should not be so big as to become impossible to plan/task/prioritize within a level of accuracy.
+T	Testable	The PBI or its related description must provide the necessary information to make test development possible.
+- PR's can be iterative, not "perfection/ everything 100% done and good to go"
+
+
+Build times
+If the build time is 30 minutes or worse, developers change pace to match only a couple of commits a day and drop their throughput.
+IMPORTANT: difference between "building" (CI) and "releasing" (CD)
+
+Database migrations:
+In order to manage database schemas in a Trunk-Based Development way you will need to find a way to handle table-shape changes <under source control>
+
+
+
+
+Teams with a very high release cadence do not need (and cannot use) release branches at all. They have to release from the trunk.
+-> "roll forward" fixing ("customer always has latest")
+
+
+A list of trade-offs are:
+
+Whether your build technology needs to build ‘everything’ for every commit. Google’s Blaze (Bazel in opensource-land) does not.
+Whether your source-control system has a push/pull bottleneck and whether you’ve reached that with all the committers in one repo
+The median build duration, versus that commit rate.
+How often your build-automation infra falls behind the commits/pull-requests that need to be compiled/tested.
+Whether your developers can avoid using the automated builds as a crutch
+Whether follow up commits are a workable way of addressing things that need improvements
+Whether the developers are good at separating refactoring commits from functional commits, and indeed “baby commits” generally.
+Whether your team can handle code-review feedback after commit/push to trunk/master or not
+
+
+
+practice what we preach:
+build succes rate of lecfront, scanningapi (cd_on_staging):
+https://app.circleci.com/insights/github/Lansweeper
+

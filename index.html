@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>reveal.js</title>
+
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+  </head>
+
+  <!-- .slide: data-background="#2b6a6c" -->
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown>
+          <script type="text/template">
+            Git in the trunk
+
+            !["Git in the trunk"](images/inthetrunk.png)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            - start with why
+              - high performing teams
+              - 2 examples of effectiveness (vs efficiency)
+
+            - what
+              - TBD explained
+              - feature branching explained
+              - why (not)
+
+            - how
+              - practical example
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            !["Start with why"](images/startwithwhy.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["effective teams"](images/effective-teams.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            Increasing effectiveness - the importance of:
+              - feedback
+              - managing queues
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## Two digit lottery
+            _A winning combination pays off $100._
+            ### We can:
+            buy a two-digit lottery ticket for $1.
+
+            *OR*
+
+            buy the 1st digit for 50 cents with the option to buy another digit of 50 cents after the first digit is revealed.
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            !["42"](images/feedback.png)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## mailing cards
+            - write address
+            - fold newsletter
+            - seal
+            - put on the stamp
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            The one envelope at a time approach is a faster way of getting the job done even though it seems inefficient.
+            - One piece flow
+              - (forced to) fix mistakes immediately - eg improvement
+              - earlier discovery = compounding effect (finding bugs later = more expensive)
+              - more iterations results in (more) continuous improvement of the process
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            Cost of change
+            !["Cost of change"](images/cost-of-change.jpg)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Continuous integration
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            In software engineering, continuous integration (CI) is the practice of merging all developers' working copies to a shared mainline several times a day.
+            https://en.wikipedia.org/wiki/Continuous_integration
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            !["CI on a dollar a day"](images/CI_dollar_day.png)
+          </script>
+        </section>
+        <section>
+          Trunk based development
+          <blockquote>
+            A source-control branching model, where developers collaborate on
+            code in a single branch called ‘trunk’ *, resist any pressure to
+            create other long-lived development branches by employing documented
+            techniques. They therefore avoid merge hell, do not break the build,
+            and live happily ever after.
+          </blockquote>
+          <small>* master, or main, in Git nomenclature</small>
+        </section>
+
+        <section>
+          Trunk based development
+          <blockquote>
+            Trunk based development is about getting rid of the mindset that
+            only "finished" and "fully working" code should be committed into
+            master. This is never the case.
+          </blockquote>
+        </section>
+        <section>
+          <blockquote>
+            The mindset that this model offers instead is that each commit must
+            NOT be a breaking change. The key is to be making small atomic
+            changes, which don't break CI and your functionality at runtime.
+          </blockquote>
+        </section>
+        <section>
+          Trunk based development
+          <blockquote>
+            Trunk based development doesn't have to mean everybody pushing to
+            master without any code reviews. What it means is that instead of
+            making multiple small commits into your feature branch, you make
+            pull requests for those same commits to master instead.
+          </blockquote>
+        </section>
+        <section>
+          Trunk based development
+          <blockquote>
+            This requires to break down your work into smaller increments, each
+            of which is slowly working towards a completed feature.
+          </blockquote>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["feature branching"](images/feature-branching.png)
+            ![alt text](images/stateofdevops.png "Title")
+            -> The idea that developers should work in small batches off master or trunk rather than on long-lived feature branches is still one of the most controversial ideas in the Agile canon, despite the fact it is the norm in high-performin roganizations such as Google. -- 2016 State of DevOps Reports
+          </script>
+        </section>
+
+        <section>
+          <blockquote>
+            "Feature Branching is a poor man’s modular architecture, instead of
+            building systems with the ability to easy swap in and out features
+            at runtime/deploytime they couple themselves to the source control
+            providing this mechanism through manual merging."
+          </blockquote>
+          (Dan Bodart)
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["feature branch vs TBD"](images/feature-branching-vs-tbd.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            CRUCIAL:
+            - practice incremental software development
+            - invest heavily in automated tests
+            - fast builds!
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            "Deployed": technical - introduced in Production.
+            “Released”: business - available to an end-user.
+
+            “Deployed” !== “Released”.
+
+            _Too often treated as ===_
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["feature toggles"](images/feature_toggle.png)
+            -  decouple deploy from release
+            - "dark launch" (customers or developers)
+            - technical (refactoring) OR functional
+            - simplest form: app config, ...
+            - important to remove after implementation(!)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            strangler pattern
+            !["strangler pattern"](images/strangler-pattern.jpeg)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            - introduce interface
+            - implement alternative implementation
+            - remove original implementation
+            - remove interface (optional)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            Links:
+            - https://trunkbaseddevelopment.com/
+            - Feature branching is evil https://www.youtube.com/watch?v=h4DM-Wa0aDQ
+            - http://www.startuplessonslearned.com/2011/09/power-of-small-batches.html
+          </script>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
