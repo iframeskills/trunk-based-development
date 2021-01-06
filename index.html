@@ -42,12 +42,12 @@
 
             - what
               - continuous integration
-              - TBD explained
+              - Trunk based development explained
               - feature branching
 
             - how
-              - TBD mindset and practical patterns
-              - releasing (without and with TBD)
+              - Trunk based development mindset and practical patterns
+              - releasing (without and with Trunk based development)
               - pitfalls
 
             - questions/discuss
@@ -137,7 +137,7 @@
           <script type="text/template">
             - what
               - continuous integration
-              - TBD explained
+              - Trunk based development explained
               - feature branching explained
               - why (not)
           </script>
@@ -232,14 +232,14 @@
           </blockquote>
           (Dan Bodart)
           <blockquote>
-            CONTINUOUS INTEGRATION AND FEATURE BRANCHING ARE NOT COMPATIBLE
+            Continuous integration and feature branching are not compatible
           </blockquote>
           (Me)
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            !["feature branch vs TBD"](images/feature-branching-vs-tbd.png)
+            !["feature branch vs Trunk based development"](images/feature-branching-vs-Trunk based development.png)
           </script>
         </section>
 
@@ -273,16 +273,16 @@
         <section data-markdown>
           <script type="text/template">
             ## how
-              - TBD mindset
+              - Trunk based development mindset
               - incremental development
               - practical patterns
-              - releasing (without and with TBD)
+              - releasing (without and with Trunk based development)
               - pitfalls
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
-            ## TBD mindset:
+            ## Trunk based development mindset:
             - practice incremental software development
             - never break the build - _stop the line; andon cord_
             - escaped bug? _write an automated test!_
@@ -347,17 +347,28 @@
             !["strangler pattern"](images/strangler-pattern-fig.jpg)
           </script>
         </section>
+        <section data-markdown>
+          <script type="text/template">
+            #SOLID
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            open-closed principle -> ADD code, do not change code<br />
+            interface segregation principle -> branch by abstraction; using an interface<br />
+          </script>
+        </section>
 
         <section data-markdown>
           <script type="text/template">
             ## releasing
 
-            (without and with TBD)
+            (without and with Trunk based development)
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
-            !["TBD releases"](images/unmerge.jpg)
+            !["Trunk based development releases"](images/unmerge.jpg)
             - change of sequence? the cost of unmerge
             - constant merging (conflicts)
             - alternative worse: infrequent, huge merges
@@ -373,7 +384,7 @@
 
         <section data-markdown>
           <script type="text/template">
-            !["TBD releases"](images/releases.png)
+            !["Trunk based development releases"](images/releases.png)
 
             hardening releases
           </script>
