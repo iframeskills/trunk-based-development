@@ -36,15 +36,21 @@
           <script type="text/template">
             - start with why
               - high performing teams
-              - 2 examples of effectiveness (vs efficiency)
+              - 2 examples of effectiveness
 
             - what
+              - continuous integration
               - TBD explained
               - feature branching explained
               - why (not)
 
             - how
-              - practical example
+              - TBD mindset
+              - practical patterns
+              - releasing (without and with TBD)
+              - pitfalls
+
+            - questions/discuss
           </script>
         </section>
         <section data-markdown>
@@ -61,22 +67,22 @@
 
         <section data-markdown>
           <script type="text/template">
-            Increasing effectiveness - the importance of:
-              - feedback
-              - managing queues
-          </script>
-        </section>
-
-        <section data-markdown>
-          <script type="text/template">
             ## Two digit lottery
             _A winning combination pays off $100._
             ### We can:
-            buy a two-digit lottery ticket for $1.
+            (A) buy a two-digit lottery ticket for $1.
 
             *OR*
 
-            buy the 1st digit for 50 cents with the option to buy another digit of 50 cents after the first digit is revealed.
+            (B) buy 1 digit for 0.5$ _with the option to buy another digit of 50 cents - after the first digit is revealed._
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## Two digit lottery
+            - ( A ) -> good luck...
+            - ( B ) -> first digit is "4"
+              - do you invest another 50c for a second number?
           </script>
         </section>
         <section data-markdown>
@@ -88,26 +94,55 @@
           <script type="text/template">
             ## mailing cards
             - write address
-            - fold newsletter
-            - seal
+            - fold card
+            - put the card in the envelope, seal it
             - put on the stamp
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
-            The one envelope at a time approach is a faster way of getting the job done even though it seems inefficient.
-            - One piece flow
-              - (forced to) fix mistakes immediately - eg improvement
-              - earlier discovery = compounding effect (finding bugs later = more expensive)
-              - more iterations results in (more) continuous improvement of the process
+            ## mailing cards
+            - ( A ) - BULK: write all addresses, fold all cards, ...
+            - ( B ) - ONE BY ONE - one card at a time; write address, fold card, ...
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            (B) The one envelope at a time approach is a faster way of getting the job done even though it seems inefficient.
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            - Lean principle: One piece flow
+              - more iterations = (more) continuous improvement of the process
+              - (forced to) fix mistakes immediately
+              - earlier discovery of defects= compounding effect (finding bugs later = more expensive)
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
             Cost of change
+
             !["Cost of change"](images/cost-of-change.jpg)
           </script>
         </section>
+        <section data-markdown>
+          <script type="text/template">
+            Increasing effectiveness - the importance of:
+              - feedback - is my code safe to release TODAY?
+              - managing queues - DO NOT BATCH, small and incremental instead
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            - what
+              - continuous integration
+              - TBD explained
+              - feature branching explained
+              - why (not)
+          </script>
+        </section>
+
         <section data-markdown>
           <script type="text/template">
             ## Continuous integration
@@ -124,6 +159,7 @@
             !["CI on a dollar a day"](images/CI_dollar_day.png)
           </script>
         </section>
+
         <section>
           Trunk based development
           <blockquote>
@@ -139,47 +175,58 @@
         <section>
           Trunk based development
           <blockquote>
-            Trunk based development is about getting rid of the mindset that
-            only "finished" and "fully working" code should be committed into
-            master. This is never the case.
-          </blockquote>
-        </section>
-        <section>
-          <blockquote>
-            The mindset that this model offers instead is that each commit must
-            NOT be a breaking change. The key is to be making small atomic
-            changes, which don't break CI and your functionality at runtime.
-          </blockquote>
-        </section>
-        <section>
-          Trunk based development
-          <blockquote>
-            Trunk based development doesn't have to mean everybody pushing to
-            master without any code reviews. What it means is that instead of
-            making multiple small commits into your feature branch, you make
-            pull requests for those same commits to master instead.
-          </blockquote>
-        </section>
-        <section>
-          Trunk based development
-          <blockquote>
-            This requires to break down your work into smaller increments, each
-            of which is slowly working towards a completed feature.
+            <p>
+              <small
+                >Trunk based development is about getting rid of the mindset
+                that only "finished" and "fully working" code should be
+                committed into master. This is never the case.
+              </small>
+            </p>
+            <p>
+              <small
+                >The mindset that this model offers instead is that each commit
+                must NOT be a breaking change. The key is to be making small
+                atomic changes, which don't break CI and your functionality at
+                runtime.
+              </small>
+            </p>
+            <p>
+              <small
+                >Trunk based development doesn't have to mean everybody pushing
+                to master without any code reviews. What it means is that
+                instead of making multiple small commits into your feature
+                branch, you make pull requests for those same commits to master
+                instead.
+              </small>
+            </p>
+            <p>
+              <small
+                >This requires to break down your work into smaller increments,
+                each of which is slowly working towards a completed
+                feature.</small
+              >
+            </p>
           </blockquote>
         </section>
 
         <section data-markdown>
           <script type="text/template">
             !["feature branching"](images/feature-branching.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ![alt text](images/stateofdevops.png "Title")
-            -> The idea that developers should work in small batches off master or trunk rather than on long-lived feature branches is still one of the most controversial ideas in the Agile canon, despite the fact it is the norm in high-performin roganizations such as Google. -- 2016 State of DevOps Reports
+
+            -> continuous isolation
           </script>
         </section>
 
         <section>
           <blockquote>
             "Feature Branching is a poor man’s modular architecture, instead of
-            building systems with the ability to easy swap in and out features
+            building systems with the ability to easily swap in and out features
             at runtime/deploytime they couple themselves to the source control
             providing this mechanism through manual merging."
           </blockquote>
@@ -194,15 +241,27 @@
 
         <section data-markdown>
           <script type="text/template">
-            CRUCIAL:
+            ## how
+              - TBD mindset
+              - incremental development
+              - practical patterns
+              - releasing (without and with TBD)
+              - pitfalls
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            ## TBD mindset:
             - practice incremental software development
-            - invest heavily in automated tests
-            - fast builds!
+            - never break the build - _stop the line; andon cord_
+            - escaped bug? _write an automated test!_
+            - fast builds: _make and keep them fast!_
           </script>
         </section>
 
         <section data-markdown>
           <script type="text/template">
+            ## Incremental development
             "Deployed": technical - introduced in Production.
             “Released”: business - available to an end-user.
 
@@ -211,9 +270,15 @@
             _Too often treated as ===_
           </script>
         </section>
-
         <section data-markdown>
           <script type="text/template">
+            ## practical patterns
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            Feature toggles
+
             !["feature toggles"](images/feature_toggle.png)
             -  decouple deploy from release
             - "dark launch" (customers or developers)
@@ -225,7 +290,13 @@
 
         <section data-markdown>
           <script type="text/template">
-            strangler pattern
+            Refactoring straight on trunk
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            branch by abstraction (micro)
             !["strangler pattern"](images/strangler-pattern.jpeg)
           </script>
         </section>
@@ -238,6 +309,72 @@
             - remove interface (optional)
           </script>
         </section>
+        <section data-markdown>
+          <script type="text/template">
+            the strangler pattern (macro)
+
+            !["strangler pattern"](images/strangler-pattern-fig.jpg)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## releasing
+
+            (without and with TBD)
+          </script>
+        </section>
+        <section data-markdown>
+          <script type="text/template">
+            !["TBD releases"](images/unmerge.jpg)
+            - change of sequence? the cost of unmerge
+            - constant merging (conflicts)
+            - alternative worse: infrequent, huge merges
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["strangler pattern"](images/release1.png)
+            !["strangler pattern"](images/release3.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["TBD releases"](images/releases.png)
+
+            hardening releases
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            !["strangler pattern"](images/release2.png)
+            !["strangler pattern"](images/release3.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## doing it wrong
+            - Cherry-pick of bug fixes from release branches to the trunk
+            - Merging rather than cherry-pick to/from a release branch
+            - Duration of ‘short-lived’ feature branches
+            - Numbers of developers on ‘short-lived’ feature branches
+            - Keeping a single release branch
+            - Merge from one release branch to another release branch
+            - Merge everything back from a release branch at the end of the release branch
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            Questions/discussion
+
+            - https://app.circleci.com/insights/github/Lansweeper
+          </script>
+        </section>
 
         <section data-markdown>
           <script type="text/template">
@@ -245,6 +382,7 @@
             - https://trunkbaseddevelopment.com/
             - Feature branching is evil https://www.youtube.com/watch?v=h4DM-Wa0aDQ
             - http://www.startuplessonslearned.com/2011/09/power-of-small-batches.html
+            - https://paulhammant.com/2013/03/19/cost-of-unmerge/
           </script>
         </section>
       </div>
