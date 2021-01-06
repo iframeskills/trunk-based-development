@@ -30,6 +30,8 @@
             Git in the trunk
 
             !["Git in the trunk"](images/inthetrunk.png)
+
+            warning: strong opinions
           </script>
         </section>
         <section data-markdown>
@@ -41,12 +43,10 @@
             - what
               - continuous integration
               - TBD explained
-              - feature branching explained
-              - why (not)
+              - feature branching
 
             - how
-              - TBD mindset
-              - practical patterns
+              - TBD mindset and practical patterns
               - releasing (without and with TBD)
               - pitfalls
 
@@ -231,12 +231,43 @@
             providing this mechanism through manual merging."
           </blockquote>
           (Dan Bodart)
+          <blockquote>
+            CONTINUOUS INTEGRATION AND FEATURE BRANCHING ARE NOT COMPATIBLE
+          </blockquote>
+          (Me)
         </section>
 
         <section data-markdown>
           <script type="text/template">
             !["feature branch vs TBD"](images/feature-branching-vs-tbd.png)
           </script>
+        </section>
+
+        <section style="text-align: left">
+          TL;DR - feature branching bad
+          <small
+            >- CI on feature branches: good start, but you don't know what
+            breaks when integrating other branches: hinders integration at the
+            feature level<br />
+            - single piece flow increase throughput, reduce leadtime and time to
+            market<br />
+            - this is batching, NOT single piece flow<br />- delays feedback:
+            continuous isolation<br />
+            - cherry pick changes between branches? (terrible, complexity)<br />
+            - hides work for the rest of the team/QA<br />
+            - frequent merge to mainline = automatic communication with your
+            team and cross team<br />
+            - feature branch = "hidden" conditional<br />
+            - works against refactoring<br />
+            - the longer the branch runs the more you diverge<br />
+            - not refactoring = slow down<br />
+            - creates inventory (80% done, 0% usable)<br />
+
+            - the bigger the changeset, the harder it is to find bugs<br />
+            - "build always broken"<br />
+            - creates all sorts of cognitive overhead (overview of branches,
+            features, releases? who has what on which branch?)<br />
+          </small>
         </section>
 
         <section data-markdown>
