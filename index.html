@@ -67,6 +67,12 @@
 
         <section data-markdown>
           <script type="text/template">
+            efficient != effective
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
             ## Two digit lottery
             _A winning combination pays off $100._
             ### We can:
@@ -116,13 +122,14 @@
             - Lean principle: One piece flow
               - more iterations = (more) continuous improvement of the process
               - (forced to) fix mistakes immediately
-              - earlier discovery of defects= compounding effect (finding bugs later = more expensive)
+              - more resilient to changes and/or mistakes
           </script>
         </section>
         <section data-markdown>
           <script type="text/template">
             Cost of change
 
+            - earlier discovery of defects= compounding effect (finding bugs later = more expensive)
             !["Cost of change"](images/cost-of-change.jpg)
           </script>
         </section>
@@ -130,7 +137,7 @@
           <script type="text/template">
             Increasing effectiveness - the importance of:
               - feedback - is my code safe to release TODAY?
-              - managing queues - DO NOT BATCH, small and incremental instead
+              - managing queues - DO NOT BATCH (a "lot" of code), small and incremental instead
           </script>
         </section>
         <section data-markdown>
@@ -201,8 +208,8 @@
             </p>
             <p>
               <small
-                >This requires to break down your work into smaller increments,
-                each of which is slowly working towards a completed
+                >This requires you to break down your work into smaller
+                increments, each of which is slowly working towards a completed
                 feature.</small
               >
             </p>
@@ -217,9 +224,15 @@
 
         <section data-markdown>
           <script type="text/template">
-            ![alt text](images/stateofdevops.png "Title")
+            gitflow
 
-            -> continuous isolation
+            !["gitflow"](images/gitflow.png)
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ![state of devops](images/stateofdevops.png "state of devops")
           </script>
         </section>
 
@@ -230,16 +243,20 @@
             at runtime/deploytime they couple themselves to the source control
             providing this mechanism through manual merging."
           </blockquote>
-          (Dan Bodart)
+          <small>(Dan Bodart)</small>
+        </section>
+
+        <section>
           <blockquote>
-            Continuous integration and feature branching are not compatible
+            Continuous integration and feature branching are not compatible.<br /><br />
+            Feature branching, instead, is continuous isolation
           </blockquote>
-          (Me)
+          <small>(Me)</small>
         </section>
 
         <section data-markdown>
           <script type="text/template">
-            !["feature branch vs Trunk based development"](images/feature-branching-vs-Trunk based development.png)
+            ![](images/feature-branching-vs-tbd.png "")
           </script>
         </section>
 
@@ -249,22 +266,20 @@
             >- CI on feature branches: good start, but you don't know what
             breaks when integrating other branches: hinders integration at the
             feature level<br />
-            - single piece flow increase throughput, reduce leadtime and time to
-            market<br />
-            - this is batching, NOT single piece flow<br />- delays feedback:
-            continuous isolation<br />
-            - cherry pick changes between branches? (terrible, complexity)<br />
-            - hides work for the rest of the team/QA<br />
+
+            - batching, NOT single piece flow<br />
+            - delays feedback<br />
+            - cherry pick changes between branches? (complexity, fragile,
+            regression)<br />
+            - hides work for the rest of the team, QA<br />
             - frequent merge to mainline = automatic communication with your
             team and cross team<br />
             - feature branch = "hidden" conditional<br />
-            - works against refactoring<br />
-            - the longer the branch runs the more you diverge<br />
-            - not refactoring = slow down<br />
+            - the longer the branch runs the more you diverge, exponentially
+            increasing integration cost<br />
             - creates inventory (80% done, 0% usable)<br />
-
             - the bigger the changeset, the harder it is to find bugs<br />
-            - "build always broken"<br />
+            - "build always broken" situations<br />
             - creates all sorts of cognitive overhead (overview of branches,
             features, releases? who has what on which branch?)<br />
           </small>
@@ -286,7 +301,16 @@
             - practice incremental software development
             - never break the build - _stop the line; andon cord_
             - escaped bug? _write an automated test!_
+              - evolutionary resilience
             - fast builds: _make and keep them fast!_
+              - seperate fast from slow tests, multi stage strategy
+              - https://app.circleci.com/insights/github/Lansweeper
+          </script>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+            ## practical patterns
           </script>
         </section>
 
@@ -303,19 +327,16 @@
         </section>
         <section data-markdown>
           <script type="text/template">
-            ## practical patterns
-          </script>
-        </section>
-        <section data-markdown>
-          <script type="text/template">
             Feature toggles
 
             !["feature toggles"](images/feature_toggle.png)
+            <small>
             -  decouple deploy from release
             - "dark launch" (customers or developers)
             - technical (refactoring) OR functional
             - simplest form: app config, ...
             - important to remove after implementation(!)
+            </small>
           </script>
         </section>
 
@@ -355,7 +376,7 @@
         <section data-markdown>
           <script type="text/template">
             open-closed principle -> ADD code, do not change code<br />
-            interface segregation principle -> branch by abstraction; using an interface<br />
+            dependency inversion principle -> branch by abstraction; using an interface<br />
           </script>
         </section>
 
@@ -369,9 +390,11 @@
         <section data-markdown>
           <script type="text/template">
             !["Trunk based development releases"](images/unmerge.jpg)
+            <small>
             - change of sequence? the cost of unmerge
-            - constant merging (conflicts)
-            - alternative worse: infrequent, huge merges
+            - frequent merging (conflicts)
+            - alternative: infrequent, bigger merges (big conflicts)
+            </small>
           </script>
         </section>
 
